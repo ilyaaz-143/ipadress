@@ -1,0 +1,116 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: 'Rubik', sans-serif;
+  }
+  .attribution { font-size: 11px; text-align: center; }
+  .attribution a { color: hsl(228, 45%, 44%); }
+  .container-fluid{
+    min-height: 30vh;
+    display: flex ;
+    justify-content: center ;
+    align-items: center ;
+    background-image: url("images/pattern-bg.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+
+  }
+  #txt{
+    width: 500px;
+    padding: 15px ;
+    border-radius: 5px 5px 5px 5px;
+    outline: none;
+    border: none;
+    font-size: 18px;
+  }
+  .row{
+    align-items: center;
+    display: flex ;
+    justify-content: center ;
+    align-self: center;
+    position: relative;
+    flex-direction: column;
+  }
+  .row h1{margin-bottom: 30px; color: white;}
+  .row div{position: relative;}
+  .btn{
+    position: absolute;
+    right: 0%;
+    bottom: 0;
+    top: 0%;
+    padding: 15px 20px;
+    /* border: none; */
+    border-radius: 0px 5px 5px 0px;
+    background-color: hsl(0, 0%, 17%);
+    color: white;
+    font-size: 32px;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    transition: ease 300ms;
+    outline: none;
+    border: none;
+  }
+  .btn:hover{
+    background-color:  hsl(0, 0%, 59%);
+  }
+  .info{
+    position: absolute;
+    width: 70%;
+    top: 27%;
+    left: 50%;
+    transform: translateX(-50%);
+    display: grid;
+    grid-template-columns: repeat(4,1fr);
+    padding: 40px 10px;
+    background-color: white;
+    border-radius: 10px;
+    filter: drop-shadow(5px 2px 1px #ccc);
+    z-index: 90;
+  }
+  .info p{
+    text-transform: uppercase;
+    color: hsl(0, 0%, 59%);
+    padding: 5px 0px 10px 0px;
+  }
+  .info div:nth-last-child(2){
+    border-right: .3px solid hsl(0, 0%, 59%);
+  }
+  .info div:nth-last-child(3){
+    border-right: .3px solid hsl(0, 0%, 59%);
+  }
+  .info div:nth-last-child(4){
+    border-right: .3px solid hsl(0, 0%, 59%);
+  }
+  @media screen and ( max-width: 645px ) {
+    .info{
+      display: grid;
+      grid-template-columns: repeat(1,1fr);
+      grid-template-rows: repeat(4,1fr);
+    }
+    .info div{
+      text-align: center;
+    }
+    .info div:nth-last-child(2){
+    border-right: none;
+  }
+  .info div:nth-last-child(3){
+    border-right: none;
+  }
+  .info div:nth-last-child(4){
+    border-right: none;
+  }
+  }
+  @media screen and ( max-width: 500px ) {
+    #txt{
+      width: 300px;
+    }
+    .info {
+      top: 24%;
+    }
+  }
+  #mapid{
+    height: 70vh;
+    width: 100%;
+  }

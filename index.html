@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- displays site properly based on user's device -->
+
+  <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png">
+ <link rel="stylesheet" href="https://fonts.google.com/specimen/Rubik">
+ <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+ integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
+ crossorigin=""/>
+ <script  src='https://api.mapbox.com/mapbox-gl-js/v2.3.1/mapbox-gl.js'></script>
+<link href='https://api.mapbox.com/mapbox-gl-js/v2.3.1/mapbox-gl.css' rel='stylesheet' />
+ <link rel="stylesheet" href="style.css">
+  <title>Frontend Mentor | IP Address Tracker</title>
+
+  <!-- Feel free to remove these styles or customise in your own stylesheet 👍 -->
+</head>
+<body>
+  <div class="container-fluid">
+    <div class="container">
+      <div class="row">
+        <h1>IP Address Tracker</h1>
+        <div>
+        <input type="text" name="text" id="txt" placeholder="Search for any IP address or domain">
+        <button class="btn">	&#8250; </button>
+      </div>
+      </div>
+      </form>
+    </div>
+  </div>
+  <div class="info">
+    <div><p>IP Address</p><h2 class="ip"></h2></div>
+    <div><p>Location</p><h2 class="location"></h2></div>
+    <div><p>Timezone</p><h2 class="timezone">UTC</h2></div>
+    <div><p>ISP</p><h2 class="isp"></h2></div>
+  </div>
+  <div id="mapid"></div>
+  <div class="attribution">
+    Challenge by <a href="https://www.frontendmentor.io?ref=challenge" target="_blank">Frontend Mentor</a>. 
+    Coded by <a href="#">Your Name Here</a>.
+  </div>
+  <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
+   integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
+   crossorigin=""></script>
+  <script>
+    let btn=document.querySelector('.btn');
+    let lng='';
+    let lat='';
+    let ip=document.querySelector('.ip')
+    let loc=document.querySelector('.location')
+    let timezone=document.querySelector('.timezone')
+    let isp=document.querySelector('.isp')
+    btn.addEventListener('click',(e)=>{
+      e.preventDefault();
+      let input=document.getElementById('txt');
+    let value=input.value;
+      console.log(value)
+      let ipapi=`https://geo.ipify.org/api/v1?apiKey=at_xH1tGA2ce2Bt60Zw3TiWycLQtY40t&ipAddress=${value}`
+      console.log(ipapi)
+    let get=fetch(ipapi)
+    .then(res=>res.json())
+    .then(data=>{console.log(data.location)
+    lat+=data.location.lat;
+      lng+=data.location.lng;
+    ip.textContent=data.ip
+    loc.textContent=data.location.region+" , "+data.location.city
+    timezone.textContent+=" "+data.location.timezone
+    isp.textContent=data.isp
+    mapboxgl.accessToken = 'pk.eyJ1IjoiZWxpYXNhbGkyMiIsImEiOiJja3FjamM1eWQwM3ZyMm5wZWw2YXcxYW85In0.K8QInoKB-ynHGJtY71xt3g';
+var map = new mapboxgl.Map({
+container: 'mapid', // container id
+style: 'mapbox://styles/mapbox/streets-v11',
+center: [data.location.lng, data.location.lat], // starting position
+zoom: 13 // starting zoom
+});
+// Add zoom and rotation controls to the map.
+var marker = new mapboxgl.Marker()
+.setLngLat([30.5, 50.5])
+.addTo(map);
+map.addControl(new mapboxgl.NavigationControl());
+var marker1 = new mapboxgl.Marker()
+.setLngLat([data.location.lng, data.location.lat])
+.addTo(map);
+    })
+    console.log(lng+" "+lat);
+  })
+  </script>
+</body>
+</html>
